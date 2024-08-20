@@ -1,4 +1,4 @@
 # langchan-laboratory
 Just a set of LangChain related projects. Nothing fancy.
 
-![fc71dc0a-d70d-49b4-bdf9-0a71ccf4ec7c](https://github.com/user-attachments/assets/b96cfde4-26cd-4eda-bfc5-d23e11229b18)
+![DALL·E 2024-08-20 23 51 27 - A futuristic cartoonish scene of an AI robot as an explorer, traveling through a digital universe  The AI robot is designed with friendly features, a ](https://github.com/user-attachments/assets/be67099c-9ae8-4926-9e2c-836244baae9e)
