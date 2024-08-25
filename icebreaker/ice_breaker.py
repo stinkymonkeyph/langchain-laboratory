@@ -1,39 +1,31 @@
-from langchain.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
-from dotenv import load_dotenv
-
 import os
 
-information = """
-    Elon Reeve Musk FRS (/ˈiːlɒn/; born June 28, 1971) is a
-    businessman and investor known
-    for his key roles in the space company SpaceX
-    and the automotive company Tesla,
-    Inc. Other involvements include ownership of X Corp.,
-    the company that
-    operates the social media platform X
-    (formerly known as Twitter), and his role in the founding of
-    The Boring Company, xAI, Neuralink, and
-    OpenAI. He is one of the wealthiest individuals in the world;
-    as of August 2024 Forbes estimates his net worth to be US$241 billion
-"""
+from dotenv import load_dotenv
+from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI
+from pydantic.v1 import SecretStr
+from third_parties.linkedin import scrape_linkedin_profile
 
-if __name__ == '__main__':
-    load_dotenv()
+if __name__ == "__main__":
+    _ = load_dotenv()
+
+    information = scrape_linkedin_profile(
+        "https://www.linkedin.com/in/nelmin-jay-anoc/"
+    )
 
     summary_template = """
-        given the information {information} about a person from I
+        given the linkedin information {information} about a person from I
         want you to create:
         1. a short summary
         2. two interesting facts about them
     """
 
-    summary_prompt_template = ChatPromptTemplate.from_template(
-        summary_template)
+    summary_prompt_template = ChatPromptTemplate.from_template(summary_template)
 
-    llm = ChatOpenAI(temperature=0, model_name="gpt-4o",
-                     api_key=os.environ["OPENAI_API_KEY"])
+    llm = ChatOpenAI(
+        temperature=0, model="gpt-4o", api_key=SecretStr(os.environ["OPENAI_API_KEY"])
+    )
 
     chain = summary_prompt_template | llm | StrOutputParser()
 
