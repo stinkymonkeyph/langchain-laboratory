@@ -10,9 +10,7 @@ from third_parties.linkedin import scrape_linkedin_profile
 if __name__ == "__main__":
     _ = load_dotenv()
 
-    information = scrape_linkedin_profile(
-        "https://www.linkedin.com/in/michelle-jane-espino-9a6907247/"
-    )
+    information = scrape_linkedin_profile("https://ph.linkedin.com/in/nelmin-jay-anoc")
 
     summary_template = """
         given the linkedin information {information} about a person from I
