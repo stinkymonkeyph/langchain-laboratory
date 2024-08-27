@@ -11,7 +11,7 @@ if __name__ == "__main__":
     _ = load_dotenv()
 
     information = scrape_linkedin_profile(
-        "https://www.linkedin.com/in/nelmin-jay-anoc/"
+        "https://www.linkedin.com/in/michelle-jane-espino-9a6907247/"
     )
 
     summary_template = """
@@ -19,6 +19,8 @@ if __name__ == "__main__":
         want you to create:
         1. a short summary
         2. two interesting facts about them
+
+        your tone should be like rick from rick and morty 
     """
 
     summary_prompt_template = ChatPromptTemplate.from_template(summary_template)
