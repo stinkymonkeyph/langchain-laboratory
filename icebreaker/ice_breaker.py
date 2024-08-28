@@ -1,5 +1,6 @@
 import os
 
+from agents.linkedin_lookup_agent import lookup
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -10,7 +11,9 @@ from third_parties.linkedin import scrape_linkedin_profile
 if __name__ == "__main__":
     _ = load_dotenv()
 
-    information = scrape_linkedin_profile("https://ph.linkedin.com/in/nelmin-jay-anoc")
+    linkedin_profile_url = lookup("Nelmin Jay M. Anoc")
+
+    information = scrape_linkedin_profile(linkedin_profile_url)
 
     summary_template = """
         given the linkedin information {information} about a person from I

@@ -10,8 +10,7 @@ from langchain.prompts.prompt import PromptTemplate
 from langchain_core.tools import Tool
 from langchain_openai import ChatOpenAI
 from pydantic.v1 import SecretStr
-
-from ..tools.tools import get_profile_url_travily
+from tools.tools import get_profile_url_travily
 
 load_dotenv()
 
@@ -23,7 +22,10 @@ def lookup(name: str) -> str:
 
     template = """
         given the full name {name_of_person} I want you to get it me a link to their linkedin profile page.
-        your answer should contain only a URL
+        your answer should contain only a URL, and it should be a Linkedin url, you can also try inferring the lastname and middlename, 
+        and just use the firstname or ignore the middlename, or middle initial if you can if you are having a difficult time searching for linkedin profile,
+        you can try permutating the name to get the best result
+        result should be something like linkedin.com/
     """
 
     prompt_template = PromptTemplate(
@@ -32,7 +34,7 @@ def lookup(name: str) -> str:
 
     tools_for_agent = [
         Tool(
-            name="Crawl Google 4 linkedin profile page",
+            name="Search for linkedin profile",
             func=get_profile_url_travily,
             description="useful for when you need to get the Linkedin Page URL",
         )
@@ -48,8 +50,3 @@ def lookup(name: str) -> str:
 
     linked_profile_url = result["output"]
     return linked_profile_url
-
-
-if __name__ == "__main__":
-    linkedin_url = lookup(name="Nelmin Jay")
-    print(linkedin_url)
