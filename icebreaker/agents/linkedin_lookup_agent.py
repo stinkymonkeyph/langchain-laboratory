@@ -22,8 +22,8 @@ def lookup(name: str) -> str:
 
     template = """
         given the full name {name_of_person} I want you to get it me a link to their linkedin profile page.
-        your answer should contain only a URL, and it should be a Linkedin url, you can also try inferring the lastname and middlename, 
-        and just use the firstname or ignore the middlename, or middle initial if you can if you are having a difficult time searching for linkedin profile,
+        your answer should contain only a URL, and it should be a Linkedin url 
+        if you can if you are having a difficult time searching for linkedin profile,
         you can try permutating the name to get the best result
         result should be something like linkedin.com/
     """
