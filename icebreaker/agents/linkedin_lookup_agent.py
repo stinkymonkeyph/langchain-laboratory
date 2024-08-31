@@ -26,6 +26,7 @@ def lookup(name: str) -> str:
         if you are having a difficult time searching for linkedin profile,
         you can try permutating the name to get the best result
         result should be something like linkedin.com/
+        also mind that we are not looking for posts, we need the profile link only
     """
 
     prompt_template = PromptTemplate(
