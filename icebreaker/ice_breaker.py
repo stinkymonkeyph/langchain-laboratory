@@ -8,18 +8,18 @@ from langchain_openai import ChatOpenAI
 from pydantic.v1 import SecretStr
 from third_parties.linkedin import scrape_linkedin_profile
 
-if __name__ == "__main__":
+
+def ice_break_with(name: str) -> str:
     _ = load_dotenv()
-
-    linkedin_profile_url = lookup("Nelmin Jay M. Anoc")
-
-    information = scrape_linkedin_profile(linkedin_profile_url)
+    linkedin_profile_url = lookup(name=name)
+    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
 
     summary_template = """
         given the linkedin information {information} about a person from I
         want you to create:
         1. a short summary
         2. two interesting facts about them
+        3. interesting role or project
 
         your tone should be like rick from rick and morty 
     """
@@ -32,6 +32,10 @@ if __name__ == "__main__":
 
     chain = summary_prompt_template | llm | StrOutputParser()
 
-    res = chain.invoke({"information": information})
+    res = chain.invoke({"information": linkedin_data})
 
-    print(res)
+    return res
+
+
+if __name__ == "__main__":
+    print(ice_break_with("Nelmin Jay M. Anoc"))
