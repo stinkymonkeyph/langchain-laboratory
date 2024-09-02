@@ -10,6 +10,7 @@ langchain-openai = "*"
 langchain-community = "*"
 langchainhub = "*"
 black = "*"
+fastapi = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 

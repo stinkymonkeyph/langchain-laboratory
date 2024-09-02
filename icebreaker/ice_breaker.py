@@ -1,4 +1,5 @@
 import os
+from typing import Tuple
 
 from agents.linkedin_lookup_agent import lookup
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ from third_parties.linkedin import scrape_linkedin_profile
 from output_parser import Summary, summary_parser
 
 
-def ice_break_with(name: str) -> Summary:
+def ice_break_with(name: str) -> Tuple[Summary, str | None]:
     _ = load_dotenv()
     linkedin_profile_url = lookup(name=name)
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
@@ -40,11 +41,10 @@ def ice_break_with(name: str) -> Summary:
     chain = summary_prompt_template | llm | summary_parser
 
     res = chain.invoke({"information": linkedin_data})
-
-    return res
+    return res, linkedin_data.get("profile_pic_url")
 
 
 if __name__ == "__main__":
-    res = ice_break_with("Nelmin Jay M. Anoc")
+    res, profile_pic_url = ice_break_with("Nelmin Jay M. Anoc")
     print(f"summary: {res.summary}")
     print(f"facts: {res.facts}")
