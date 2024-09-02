@@ -21,12 +21,12 @@ def lookup(name: str) -> str:
     )
 
     template = """
-        given the full name {name_of_person} I want you to get me a link to their linkedin profile page.
+        given the name {name_of_person} I want you to get me a link to their linkedin profile page.
         your answer should contain only a URL, and it should be a Linkedin url 
-        if you are having a difficult time searching for linkedin profile,
-        you can try permutating the name to get the best result
-        result should be something like linkedin.com/
-        we need the profile link only, so ignore the links with posts.
+        result should start with https://www.linkedin.com/in
+        we need the profile link only, so ignore the links with posts,
+        we don't need directory as well.
+        you can try permutating the name to get the best result.
     """
 
     prompt_template = PromptTemplate(
